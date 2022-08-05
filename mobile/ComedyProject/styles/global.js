@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native"
 
+export const URL = ''
 
 export const globalStyles = StyleSheet.create({  
     container: {

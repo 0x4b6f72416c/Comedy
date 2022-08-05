@@ -5,6 +5,7 @@ import { globalStyles } from "../styles/global";
 import { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import  * as yup from 'yup'
+import { URL } from "../styles/global";
 
 const singUpSchema = yup.object({
       userName: yup.string().required().min(4),
@@ -19,6 +20,15 @@ function _wait(ms){
    }
  }
 
+function _sendUserToDB(url,userName,phoneNumber){
+    const requestOptions = {
+        method:'POST',
+        body:JSON.stringify({name:userName,
+                            phone:phoneNumber})
+
+    }
+    fetch(url,requestOptions)
+}
 export default function InputForm(){
     
     const [borderColor,  setColor ] = useState('#666666')
@@ -33,8 +43,8 @@ export default function InputForm(){
                 onSubmit={(values)=>{
 
                     setBtnColor('#8b00ff')
-                    _wait(1000)
-                    console.log(values)
+                    _sendUserToDB()
+                    _sendUserToDB(URL,values.userName,values.phoneNumber)
                     navigation.navigate('Home')
                 }}
             >
