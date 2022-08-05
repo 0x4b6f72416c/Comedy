@@ -1,26 +1,21 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends,HTTPException,status
 from sqlalchemy.orm import Session
+from .. import schemas
 from ..database import get_session
 from .. import tables
+from ..repository import stage
 
 router = APIRouter(prefix='/stages',tags=['Stages'])
 
 @router.get('/')
-def get_all():
-    pass
+def get_all(db:Session = Depends(get_session)):
+    return stage.show_all(db,limit=100)
 
-@router.get('/{id}')
-def get_one():
-    pass
+@router.post('/',status_code=status.HTTP_201_CREATED)
+def create_stage(request:schemas.Stage,db:Session = Depends(get_session)):
+    return stage.create_stage(request,db)
 
-@router.post('/')
-def create_stage():
-    pass
+@router.put('/{id}',status_code=status.HTTP_202_ACCEPTED)
+def update_stage_info(id:int,request:schemas.Stage,db:Session = Depends(get_session)):
+    stage.update_stage_info(id,request,db)
 
-@router.put('/')
-def update_stage_info():
-    pass
-
-@router.delete('/{id}')
-def delete_stage():
-    pass

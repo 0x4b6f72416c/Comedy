@@ -10,7 +10,7 @@ class Customer(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    phone = Column(Integer)
+    phone = Column(String)
 
     reviews = relationship('Review',backref='owner')
 
@@ -23,7 +23,7 @@ class Stage(Base):
     user_onwer = Column(Integer,ForeignKey('customer.id'),nullable=False)
     location = Column(String,nullable=False)
     description = Column(String)
-    rating = Column(String)
+    rating = Column(Integer)
 
 class Review(Base):
     __tablename__ = 'review'
