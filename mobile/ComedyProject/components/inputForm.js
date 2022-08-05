@@ -21,13 +21,18 @@ function _wait(ms){
  }
 
 function _sendUserToDB(url,userName,phoneNumber){
+    userUrl = url + '/user/'
     const requestOptions = {
         method:'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-type':'application/json'
+        },
         body:JSON.stringify({name:userName,
                             phone:phoneNumber})
 
     }
-    fetch(url,requestOptions)
+    fetch(userUrl,requestOptions)
 }
 export default function InputForm(){
     
@@ -43,7 +48,6 @@ export default function InputForm(){
                 onSubmit={(values)=>{
 
                     setBtnColor('#8b00ff')
-                    _sendUserToDB()
                     _sendUserToDB(URL,values.userName,values.phoneNumber)
                     navigation.navigate('Home')
                 }}

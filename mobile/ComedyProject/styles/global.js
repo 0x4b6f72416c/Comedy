@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 
-export const URL = ''
+export const URL = 'http://192.168.195.129'
 
 export const globalStyles = StyleSheet.create({  
     container: {
