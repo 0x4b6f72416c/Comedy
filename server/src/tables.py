@@ -1,4 +1,3 @@
-from calendar import c
 from sqlalchemy import Column,ForeignKey,Integer,String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -12,7 +11,7 @@ class Customer(Base):
     name = Column(String)
     phone = Column(String)
 
-    reviews = relationship('Review',backref='owner')
+    reviews = relationship("Review",back_populates="creator")
 
 
 class Stage(Base):
@@ -20,10 +19,12 @@ class Stage(Base):
 
     id = Column(Integer, primary_key=True)   
     name = Column(String,nullable=False)
-    user_onwer = Column(Integer,ForeignKey('customer.id'),nullable=False)
+    user_owner = Column(Integer,ForeignKey('customer.id'),nullable=False)
     location = Column(String,nullable=False)
     description = Column(String)
     rating = Column(Integer)
+
+    stage_reviews = relationship("Review", back_populates='stage')
 
 class Review(Base):
     __tablename__ = 'review'
@@ -33,3 +34,6 @@ class Review(Base):
     rating = Column(Integer)
     customer_id = Column(Integer,ForeignKey('customer.id'),nullable=False)
     stage_id = Column(Integer,ForeignKey('stage.id'),nullable=False)
+
+    stage = relationship("Stage", back_populates='stage_reviews')
+    creator = relationship("Customer",back_populates="reviews")

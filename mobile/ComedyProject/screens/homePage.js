@@ -4,6 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import TextTicker from 'react-native-text-ticker'
 import { TouchableOpacity } from "react-native";
 import { SharedElement } from "react-navigation-shared-element";
+import { URL } from "../config"
 
 const dataBase = [
     {name:"Stund-up Club #1", id:'1', date:'26-06',time:'19:00',duration:'1.5', price:'600 руб', address:'Some street 54',reviews:[{reviewer:"Алена Ереева",rating:5,review:"Тонкая, элегантная электрическая кровать для Юли, с цветомузыкой и магнитами. Её должен иметь каждый. У кого Juul"},
@@ -18,11 +19,17 @@ const dataBase = [
 ]
 
 
-
+function _getStageInfo(url){
+    stageUrl = url + '/stages/'
+    info = fetch()
+    return info 
+}
 
 
 export default function HomePage({navigation}){
     
+    const stageInfo = _getStageInfo(URL)
+
     const [selectedData, setSelectedDate] = useState(dataBase)
 
     return(
@@ -86,8 +93,6 @@ export default function HomePage({navigation}){
                                 <View>
                                     <Text style={styles.eventNameBot}>{item.name}</Text>
                                     <View>
-                                        <Text style={styles.eventDescription}>{item.time}</Text>
-                                        <Text style={styles.eventDescription}>{item.price}</Text>
                                         <Text style={styles.eventDescription}>{item.address}</Text>
                                     </View>
                 

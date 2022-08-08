@@ -1,13 +1,14 @@
+from urllib import response
 from fastapi import APIRouter, Depends,HTTPException,status
 from sqlalchemy.orm import Session
 from .. import schemas
 from ..database import get_session
-from .. import tables
 from ..repository import stage
+from typing import List
 
 router = APIRouter(prefix='/stages',tags=['Stages'])
 
-@router.get('/')
+@router.get('/', response_model=List[schemas.ShowStage])
 def get_all(db:Session = Depends(get_session)):
     return stage.show_all(db,limit=100)
 

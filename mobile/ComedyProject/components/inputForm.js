@@ -5,7 +5,7 @@ import { globalStyles } from "../styles/global";
 import { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import  * as yup from 'yup'
-import { URL } from "../styles/global";
+import { URL } from "../config"
 
 const singUpSchema = yup.object({
       userName: yup.string().required().min(4),
