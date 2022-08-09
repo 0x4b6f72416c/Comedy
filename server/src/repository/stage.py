@@ -7,7 +7,7 @@ def create_stage(request:schemas.Stage,db:Session):
                             location=request.location,
                             rating=request.rating,
                             description=request.description,
-                            user_owner=request.user_id)
+                            user_owner=request.user_owner)
     db.add(new_stage)
     db.commit()
     db.refresh(new_stage)

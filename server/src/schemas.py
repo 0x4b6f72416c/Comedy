@@ -28,10 +28,9 @@ class Stage(BaseModel):
     location:str
     rating:int
     description:str
-
+    user_owner:int
 
 class ShowStage(Stage):
     stage_reviews: List[StageReview] = []
     class Config():
         orm_mode = True
-
