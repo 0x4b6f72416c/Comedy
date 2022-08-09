@@ -1,10 +1,9 @@
 import React from "react";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import StartPage from './screens/startPage'
 import HomePage from './screens/homePage'
-import EventDetailsPage from './screens/eventDetailsPage'
-import { SharedElement} from "react-navigation-shared-element";
+import StageDetailsPage from './screens/stageDetailsPage'
+import EventDetailsPage from "./screens/eventDetailsPage";
 import {createSharedElementStackNavigator} from "react-navigation-shared-element";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -22,9 +21,8 @@ export default function App() {
                                   gestureEnabled:false}}/>
           <Stack.Screen name='Home' component = {HomePage}/>
           <Stack.Screen name='Details' 
-                        component = {EventDetailsPage}
-                        
-                        />
+                        component = {StageDetailsPage}/>
+          <Stack.Screen name='EventDetails' component={EventDetailsPage}/>
         </Stack.Navigator>
     </NavigationContainer>
   </SafeAreaProvider>
