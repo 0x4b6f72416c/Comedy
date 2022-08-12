@@ -58,6 +58,18 @@ export default function EventDetailsPage({route,navigation}){
         )
     }
 
+    function getDate(item){
+        const date = new Date(item.stage_events[0].time)
+        var options = {
+            month:'long',
+            day:'numeric',
+            timezone:'UTC',
+            hour: 'numeric',
+            minute: 'numeric',
+        }
+        return date.toLocaleString('ru',options)
+
+    }
 
     return(
         <SafeAreaView style = {styles.container}>
@@ -80,30 +92,19 @@ export default function EventDetailsPage({route,navigation}){
                 <View style={{flexDirection:'row'}}>
                     <View style={styles.pill}></View>
                     <Text style={styles.eventText}>Время : </Text>
-                    <Text style={styles.eventTextRight}>{(item)=>{
-                        const date = new Date(item.stage_events.time)
-                        var options = {
-                            year:'numeric',
-                            month:'long',
-                            day:'numeric',
-                            timezone:'UTC',
-                            hour: 'numeric',
-                            minute: 'numeric',
-                        }
-                        return date.toLocaleString("ru",options)
-                    }}</Text>
+                    <Text style={styles.eventTextRight}>{getDate(item)}</Text>
                 </View>
                 <View style={styles.spliter}></View>
                 <View style={{flexDirection:'row'}}>
                     <View style={styles.pill}></View>
                     <Text style={styles.eventText}>Продолжительность : </Text>
-                    <Text style={styles.eventTextRight}>{item.stage_reviews.duration}</Text>
+                    <Text style={styles.eventTextRight}>{item.stage_events[0].duration} ч.</Text>
                 </View>
                 <View style={styles.spliter}></View>
                 <View style={{flexDirection:'row'}}>
                     <View style={styles.pill}></View>
                     <Text style={styles.eventText}>Цена : </Text>
-                    <Text style={styles.eventTextRight}>{item.stage_reviews.price}</Text>
+                    <Text style={styles.eventTextRight}>{item.stage_events[0].price} руб.</Text>
                 </View>
                 <View style={styles.spliter}></View>
                 <View style={{flexDirection:'row',}}>

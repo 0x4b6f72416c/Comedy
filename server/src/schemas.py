@@ -31,6 +31,7 @@ class EventReview(BaseReview):
     pass
 
 class Stage(BaseModel):
+    id:int
     name: str
     location:str
     rating:int
