@@ -1,4 +1,4 @@
-from sqlalchemy import Column,ForeignKey,Integer,String
+from sqlalchemy import Column,ForeignKey,Integer,String,DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -25,6 +25,7 @@ class Stage(Base):
     rating = Column(Integer)
 
     stage_reviews = relationship("Review", back_populates='stage')
+    stage_events = relationship('Event',backref='stage')
 
 class Review(Base):
     __tablename__ = 'review'
@@ -37,3 +38,16 @@ class Review(Base):
 
     stage = relationship("Stage", back_populates='stage_reviews')
     creator = relationship("Customer",back_populates="reviews")
+
+
+class Event(Base):
+    __tablename__ = 'event'
+
+    id = Column(Integer,primary_key=True)
+    time = Column(DateTime)
+    duration = Column(Integer)
+    price = Column(Integer)
+    stage_id = Column(Integer,ForeignKey('stage.id'),nullable=False)
+
+
+    

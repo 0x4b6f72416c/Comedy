@@ -92,19 +92,9 @@ export default function StageDetailsPage( {route,navigation}){
                 </View>
                 
             </View>
-            <View>
-                <Text style={styles.eventPrice}>От {item.price}</Text>
-            </View>
+
             <View style={styles.spliter}></View>
-            <View>
-                <View style={{flexDirection:'row'}}>
-                    <View style={styles.pill}></View>
-                    <Text style={styles.eventTextTime}>{item.date} в {item.time}</Text>
-                </View>   
-                <View style={{flexDirection:'row'}}>
-                    <View style={styles.pill}></View>
-                    <Text style={styles.eventTextTime}>около {item.duration} часов</Text>
-                </View>    
+            <View>    
                 <View style={{flexDirection:'row'}}>
                     <View style={styles.pill}></View>
                     <Text style={styles.eventTextTime}>адрес {item.location}</Text>

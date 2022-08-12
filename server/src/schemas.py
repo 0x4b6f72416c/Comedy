@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel
 from typing import List
 
@@ -19,11 +20,17 @@ class BaseReview(BaseModel):
 class StageReview(BaseReview):
     creator: UserIn
 
+class Event(BaseModel):
+    time:datetime
+    duration:int
+    price:int
+    class Config():
+        orm_mode = True
+
 class EventReview(BaseReview):
     pass
 
 class Stage(BaseModel):
-    id:int
     name: str
     location:str
     rating:int
@@ -32,5 +39,6 @@ class Stage(BaseModel):
 
 class ShowStage(Stage):
     stage_reviews: List[StageReview] = []
+    stage_events:List[Event] = []
     class Config():
         orm_mode = True
