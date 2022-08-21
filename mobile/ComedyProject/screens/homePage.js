@@ -1,8 +1,8 @@
-import React, { useState,PureComponent, useEffect } from "react";
+import React, { useState,PureComponent, useEffect, useCallback } from "react";
 import { SafeAreaView, View,Text,StyleSheet} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import TextTicker from 'react-native-text-ticker'
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity,RefreshControl, ScrollView, } from "react-native";
 import { SharedElement } from "react-navigation-shared-element";
 import { URL } from "../config"
 
@@ -10,8 +10,13 @@ import { URL } from "../config"
 export default function HomePage({navigation}){
     
     const [stageData, setStageData] = useState([])
+    const [refreshing, setRefreshing] = useState(false)
 
-
+    const onRefresh = useCallback(()=>{
+        setRefreshing(true)
+        getStageData()
+        setRefreshing(false)
+    })
     const getStageData = ()=>{
         const stageURL = URL + '/stages/'
         fetch(stageURL,{
@@ -21,7 +26,6 @@ export default function HomePage({navigation}){
               'Content-Type': 'application/json'
             },}).then(response => response.json())
             .then(data => {
-                console.log(data)
                 setStageData(data)})
     }
     useState(()=>{
@@ -30,6 +34,13 @@ export default function HomePage({navigation}){
 
 
     return(
+    <ScrollView
+    contentContainerStyle={styles.container}
+        refreshControl={
+            <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}/>
+        }>
         <SafeAreaView style={styles.container}>
             <View>
                 <Text style={{color:'white',
@@ -101,6 +112,7 @@ export default function HomePage({navigation}){
             />
            
         </SafeAreaView>
+    </ScrollView>
     )
 }
 

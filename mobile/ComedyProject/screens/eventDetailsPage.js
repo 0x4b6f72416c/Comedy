@@ -59,16 +59,19 @@ export default function EventDetailsPage({route,navigation}){
     }
 
     function getDate(item){
-        const date = new Date(item.stage_events[0].time)
-        var options = {
-            month:'long',
-            day:'numeric',
-            timezone:'UTC',
-            hour: 'numeric',
-            minute: 'numeric',
+        if (item != undefined){
+            const date = new Date(item.stage_events[0].time)
+            var options = {
+                month:'long',
+                day:'numeric',
+                timezone:'UTC',
+                hour: 'numeric',
+                minute: 'numeric',
+            }
+            return date.toLocaleString('ru',options)
+        }else{
+            return "нет иф-ции"
         }
-        return date.toLocaleString('ru',options)
-
     }
 
     return(
