@@ -31,7 +31,6 @@ class EventReview(BaseReview):
     pass
 
 class Stage(BaseModel):
-    id:int
     name: str
     location:str
     rating:int
@@ -39,6 +38,7 @@ class Stage(BaseModel):
     user_owner:int
 
 class ShowStage(Stage):
+    id:int
     stage_reviews: List[StageReview] = []
     stage_events:List[Event] = []
     class Config():
